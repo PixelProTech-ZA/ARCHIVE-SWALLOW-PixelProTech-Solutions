@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline';" />
+<title>Pixel Archive Swallow — PixelProTech Solutions</title>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <img class="brand-mark" src="icon-64.png" alt="Pixel Archive Swallow" width="36" height="36" />
+        <div class="brand-text">
+          <div class="brand-name">ARCHIVE SWALLOW</div>
+          <div class="brand-sub">PixelProTech Solutions</div>
+        </div>
+      </div>
+      <nav>
+        <button class="nav-item active" data-view="dashboard">DASHBOARD</button>
+        <button class="nav-item" data-view="swallow">SWALLOW</button>
+        <button class="nav-item" data-view="archive">ARCHIVE</button>
+        <button class="nav-item" data-view="search">SEARCH</button>
+        <button class="nav-item" data-view="review">REVIEW</button>
+        <button class="nav-item" data-view="boxes">BOXES</button>
+        <button class="nav-item" data-view="settings">SETTINGS</button>
+      </nav>
+      <div class="sidebar-footer">
+        <div class="status-line" id="cloud-status"><span class="dot dot-green"></span> ZERO CLOUD MODE</div>
+        <div class="reg-line">Reg 2026/622131/07</div>
+      </div>
+    </aside>
+
+    <main class="content">
+
+      <section id="view-dashboard" class="view active">
+        <h1>PIXEL ARCHIVE SWALLOW</h1>
+        <div class="stat-grid">
+          <div class="stat-card"><div class="stat-value" id="stat-documents">—</div><div class="stat-label">DOCUMENTS</div></div>
+          <div class="stat-card"><div class="stat-value" id="stat-pages">—</div><div class="stat-label">PAGES</div></div>
+          <div class="stat-card"><div class="stat-value" id="stat-boxes">—</div><div class="stat-label">BOXES</div></div>
+          <div class="stat-card warn"><div class="stat-value" id="stat-review">—</div><div class="stat-label">NEEDS REVIEW</div></div>
+        </div>
+        <div class="last-swallow">LAST SWALLOW: <span id="stat-last">—</span></div>
+        <button class="primary-btn" id="btn-start-swallow">START SWALLOW</button>
+      </section>
+
+      <section id="view-swallow" class="view">
+        <h1>SWALLOW</h1>
+        <div class="panel">
+          <label>Archive</label>
+          <select id="swallow-archive"></select>
+          <label>Box</label>
+          <select id="swallow-box"></select>
+          <label>Scanner Device (if NAPS2 installed)</label>
+          <select id="swallow-device"><option>— checking —</option></select>
+          <div class="row">
+            <div><label>DPI</label><input type="number" id="swallow-dpi" value="300" /></div>
+            <div><label>Color Mode</label>
+              <select id="swallow-color"><option>Color</option><option>Gray</option><option>BlackWhite</option></select>
+            </div>
+          </div>
+          <button class="primary-btn" id="btn-begin-batch">BEGIN BATCH (watch import folder)</button>
+          <button class="secondary-btn" id="btn-manual-import" disabled>MANUAL IMPORT (choose files)</button>
+          <p class="hint">Drop scanned files (PNG/JPG/TIFF/PDF) into the import folder shown below, or use manufacturer scanning software pointed at that folder. Files are picked up automatically.</p>
+          <div id="import-folder-path" class="mono"></div>
+        </div>
+        <div class="panel">
+          <h3>LIVE PROCESSING</h3>
+          <div id="live-log" class="live-log"></div>
+          <button class="secondary-btn" id="btn-finalize-batch" disabled>FINALIZE BATCH</button>
+        </div>
+      </section>
+
+      <section id="view-archive" class="view">
+        <h1>ARCHIVE</h1>
+        <div class="panel">
+          <label>New Archive Name</label>
+          <div class="row"><input type="text" id="new-archive-name" placeholder="e.g. Financial Records" /><button id="btn-create-archive">CREATE</button></div>
+        </div>
+        <div id="archive-list" class="list"></div>
+      </section>
+
+      <section id="view-search" class="view">
+        <h1>SEARCH</h1>
+        <div class="panel">
+          <div class="row"><input type="text" id="search-query" placeholder="supplier name, reference number, keyword..." /><button id="btn-search">SEARCH</button></div>
+        </div>
+        <div id="search-results" class="list"></div>
+      </section>
+
+      <section id="view-review" class="view">
+        <h1>REVIEW</h1>
+        <div class="panel">
+          <p id="review-count" class="hint">— items pending</p>
+        </div>
+        <div id="review-list" class="list"></div>
+      </section>
+
+      <section id="view-boxes" class="view">
+        <h1>BOXES</h1>
+        <div class="panel">
+          <label>Archive</label>
+          <select id="box-archive-select"></select>
+          <label>Box Label (e.g. FIN-014)</label>
+          <input type="text" id="new-box-label" />
+          <label>Year Range (optional)</label>
+          <input type="text" id="new-box-years" placeholder="2005–2008" />
+          <div class="row">
+            <button id="btn-create-box">CREATE BOX</button>
+            <button id="btn-print-label" class="secondary-btn">PRINT LABEL PDF</button>
+          </div>
+        </div>
+        <div id="box-list" class="list"></div>
+      </section>
+
+      <section id="view-settings" class="view">
+        <h1>SETTINGS</h1>
+        <div class="panel">
+          <p><strong>Local-first architecture.</strong> OCR, classification, search index and the archive database all run on this machine. No document content is transmitted anywhere unless you explicitly enable a future cloud feature — none exist in this build.</p>
+          <p class="mono">Data location: see OS user-data folder → PixelArchive/</p>
+          <label>Export</label>
+          <button id="btn-export-csv" class="secondary-btn">EXPORT CURRENT ARCHIVE AS CSV</button>
+        </div>
+      </section>
+
+    </main>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
